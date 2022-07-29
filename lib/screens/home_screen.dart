@@ -1,3 +1,4 @@
+import 'package:booktickets/screens/double_text_widget.dart';
 import 'package:booktickets/screens/hotel_screen.dart';
 import 'package:booktickets/screens/ticket_view.dart';
 import 'package:booktickets/utils/app_styles.dart';
@@ -6,6 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:fluentui_icons/fluentui_icons.dart';
 
 import '../utils/app_info_list.dart';
+import '../utils/app_layout.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -64,41 +66,22 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const Gap(40),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Upcoming Flights', style: Styles.headlineStyle2,),
-                  InkWell(
-                    onTap: (){
-                      print("You are tapped");
-                    },
-                      child: Text('View all', style: Styles.textStyle.copyWith(color: Styles.primaryColor),))
-                ],
-              )
+              const AppDoubleTextWidget(bigText: "Upcoming Flights", smallText: "View all")
             ]),
           ),
           const Gap(15),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.only(left: 20),
-            child: Row(
+          SizedBox(
+            height: AppLayout.getHeight(200),
+            child: ListView(
+              padding: EdgeInsets.only(left: 16),
+              scrollDirection: Axis.horizontal,
               children: ticketList.map((singleTicket)=> TicketView(ticket: singleTicket,)).toList(),
-            )
+            ),
           ),
           const Gap(15),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Hotels', style: Styles.headlineStyle2,),
-                InkWell(
-                    onTap: (){
-                      print("You are tapped");
-                    },
-                    child: Text('View all', style: Styles.textStyle.copyWith(color: Styles.primaryColor),))
-              ],
-            ),
+            child: const AppDoubleTextWidget(bigText: "Hotels", smallText: "View all")
           ),
           const Gap(15),
           SingleChildScrollView(
